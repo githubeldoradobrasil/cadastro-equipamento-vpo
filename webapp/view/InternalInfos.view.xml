@@ -1,0 +1,62 @@
+<mvc:View
+	controllerName="cadastroequip_fornecedor_vpo.controller.Detail"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<VBox>
+		<f:SimpleForm id="SimpleFormInternalInfo"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="{i18n>internalInfoTitle}"
+				labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false">
+			<f:content>
+				<Label text="{i18n>Equnr}"/>
+				<Text text="{Equnr}"/>
+				<Label text="{i18n>DataCria}" />
+				<Text text="{ path:'AedatC',
+							  type:'sap.ui.model.type.Date',
+							  formatOptions: {
+							  UTC: true,
+							  calendarType: 'Gregorian',
+						      pattern: 'dd/MM/y' }
+						}" emptyIndicatorMode="Auto"/>
+			 	<Label text="{i18n>HoraCria}" />
+				<Text text="{path: 'UzeitC', formatter: '.formatter.timeMask'}" emptyIndicatorMode="Auto"/>
+				
+				
+				<Label text="{i18n>UserCria}"/>
+				<Text text="{UnameC}" emptyIndicatorMode="Auto"/>
+				<Label  text="{i18n>EmailCria}"/>
+				<Text text="{EmailC}"/>
+				
+				<Label text="{i18n>DataModif}"/>
+				<Text text="{ path:'AedatM',
+							  type:'sap.ui.model.type.Date',
+							  formatOptions: {
+							  UTC: true,
+							  calendarType: 'Gregorian',
+						      pattern: 'dd/MM/y' }
+						}"/>
+				<Label text="{i18n>HoraModif}"/>
+				<Text text="{path: 'UzeitM', formatter: '.formatter.timeMask'}" />
+				<Label text="{i18n>UserModif}"/>
+				<Text text="{UnameM}"/>
+				<Label  text="{i18n>EmailModif}"/>
+				<Text text="{EmailM}"/>
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+</mvc:View>

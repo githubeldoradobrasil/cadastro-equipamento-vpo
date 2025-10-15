@@ -1,0 +1,182 @@
+<mvc:View
+    controllerName="cadastroequip_fornecedor_vpo.controller.Detail"
+    xmlns="sap.m"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    id="detailView"
+>
+    <semantic:SemanticPage
+        id="pageDetail"
+        busy="{detailView>/busy}"
+        busyIndicatorDelay="{detailView>/delay}"
+        showFooter="{detailView>/footer}"
+        core:require="{
+			formatMessage: 'sap/base/strings/formatMessage',
+			DateType: 'sap/ui/model/type/Date'
+		}"
+    >
+        <semantic:titleHeading>
+            <Title text="{path: 'NomeEquipamento'}" />
+        </semantic:titleHeading>
+        <semantic:headerContent>
+            <l:HorizontalLayout class="headerBox">
+                <l:VerticalLayout>
+                    <ObjectAttribute
+                        title="{i18n>commonItemPlaca}"
+                        text="{
+							path: 'Placa',
+							formatOptions: { style: 'medium' }
+						}"
+                    />
+                </l:VerticalLayout>
+                <l:VerticalLayout>
+                    <Button
+                        id="btnConsultaNSPedagio"
+                        text="Consulta NSPedágio"
+                        type='Emphasized'
+                        enabled="false"
+                        press="onLoadOperadoras"
+                    />
+                </l:VerticalLayout>
+            </l:HorizontalLayout>
+        </semantic:headerContent>
+        <semantic:content>
+            <l:VerticalLayout>
+                <IconTabBar
+                    id="iconTabBar"
+                    headerBackgroundDesign="Transparent"
+                    select=".onTabSelect"
+                    selectedKey="{detailView>/selectedTab}"
+                >
+                    <items>
+                        <IconTabFilter
+                            id="iconTabFilterEquip"
+                            icon="sap-icon://shipping-status"
+                            tooltip="{i18n>detailIconTabBarEquip}"
+                            key="equip"
+                        />
+                        <IconTabFilter
+                            id="iconTabFilterTechInfo"
+                            icon="sap-icon://technical-object"
+                            tooltip="{i18n>detailIconTabBarTechInfo}"
+                            key="tech_info"
+                        />
+                        <IconTabFilter
+                            id="iconTabFilterAttachments"
+                            icon="sap-icon://attachment"
+                            tooltip="{i18n>detailIconTabBarAttachments}"
+                            key="attachments"
+                        />
+                        <IconTabFilter
+                            id="iconTabFilterIntenal"
+                            icon="sap-icon://hint"
+                            tooltip="{i18n>detailIconTabBarInternal}"
+                            visible="{detailView>/enableInternalInformation}"
+                            key="internal"
+                        />
+                    </items>
+                </IconTabBar>
+
+                <Table
+                    id="lineItemsList"
+                    class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                    width="auto"
+                    items="{path: '/E_EquipamentoVinculoSet'}"
+                    mode="SingleSelectMaster"
+                    updateFinished="onListUpdateFinished"
+                    updateStarted="onListUpdateStart"
+                    noDataText="Sem transportadoras vinculadas"
+                    busyIndicatorDelay="{detailView>/lineItemTableDelay}"
+                >
+                    <headerToolbar>
+                        <Toolbar id="lineItemsToolbar">
+                            <Title
+                                id="lineItemsHeader"
+                                text="Vinculos com Transportadoras"
+                            />
+
+                            <ToolbarSpacer />
+                            <Button
+                                type="Reject"
+                                text="Desvincular"
+                                width="100px"
+                                press="onPressDesvincular"
+                                ariaDescribedBy="rejectButtonDescription genericButtonDescription"
+                            />
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column
+                            minScreenWidth="Tablet"
+                            demandPopin="true"
+                        >
+                            <Text text="Código da Transportadora" />
+                        </Column>
+                        <Column
+                            minScreenWidth="Tablet"
+                            demandPopin="true"
+                            hAlign="Begin"
+                        >
+                            <Text text="Nome da Transportadora" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{Tdlnr}" />
+                                <Text text="{NameTransp}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </l:VerticalLayout>
+        </semantic:content>
+
+        <semantic:editAction>
+            <semantic:EditAction
+                id="editAction"
+                press=".onEditDetail"
+            />
+        </semantic:editAction>
+
+        <semantic:closeAction>
+            <semantic:CloseAction
+                id="closeColumn"
+                press=".onCloseDetailPress"
+            />
+        </semantic:closeAction>
+        <semantic:fullScreenAction>
+            <semantic:FullScreenAction
+                id="enterFullScreen"
+                visible="{= !${device>/system/phone} &amp;&amp; !${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+                press="toggleFullScreen"
+            />
+        </semantic:fullScreenAction>
+        <semantic:exitFullScreenAction>
+            <semantic:ExitFullScreenAction
+                id="exitFullScreen"
+                visible="{= !${device>/system/phone} &amp;&amp; ${appView>/actionButtonsInfo/midColumn/fullScreen}}"
+                press="toggleFullScreen"
+            />
+        </semantic:exitFullScreenAction>
+
+        <!-- Semantic Footer Buttons -->
+        <semantic:footerMainAction>
+            <semantic:FooterMainAction
+                id="mainFooter"
+                text="{i18n>save}"
+                press="onSaveDetail"
+            />
+        </semantic:footerMainAction>
+
+        <semantic:footerCustomActions>
+            <Button
+                id="cancelAction"
+                text="{i18n>cancel}"
+                press="onCancelDetail"
+            />
+        </semantic:footerCustomActions>
+    </semantic:SemanticPage>
+</mvc:View>

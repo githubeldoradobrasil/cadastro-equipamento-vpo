@@ -1,0 +1,83 @@
+<mvc:View
+	controllerName="cadastroequip_fornecedor_vpo.controller.Detail"
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:upload="sap.m.upload"
+	displayBlock="true"
+    xmlns:m="sap.m"
+	afterRendering="onAfterRederingAttachments">
+        <upload:UploadSet 
+			id="attachmentUpl" 
+			instantUpload="false" 
+			maxFileSize="2" 
+			uploadEnabled="{detailView>/attachmentsEdit}"		
+			uploadUrl="/sap/opu/odata/sap/ZGTWPM095_EQUIPAMENTO_V2_SRV/E_AnexosSet" 
+			visible="true"
+			items="{path: 'E_Anexos', templateShareable: false}"
+            fileTypes="pdf,doc,docx,docm,ppt,pptx,xls,xlsx,jpg,jpeg,png"
+			afterItemAdded="onAfterItemAdded"
+			beforeItemRemoved="onBeforeItemRemove"
+			afterItemRemoved="onRemoveAttachmentPress"
+			uploadCompleted="handleUploadComplete"
+			mode="SingleSelect">
+            <upload:toolbar>
+                <m:OverflowToolbar>
+				<m:ToolbarSpacer/>
+                   	<m:Button
+						id="downloadSelectedButton"
+						text="Download selected"
+						press="onDownloadSelectedButton"
+						enabled="true"/>
+				</m:OverflowToolbar>
+            </upload:toolbar>
+
+			<upload:items>
+				<upload:UploadSetItem						
+						fileName="{path: 'FileName' }"
+						mediaType="{MimeType}"
+						visibleEdit="false"
+						enabledRemove="{detailView>/attachmentsEdit}"
+						thumbnailUrl="{path: 'MimeType', formatter: '.formatter.formatThumbnailUrl'}"
+						>
+					 <upload:attributes>
+					 	<m:ObjectAttribute
+								title="Criado por"
+								text="{UserCriacao}"
+								active="false"/>
+					</upload:attributes>
+					<upload:statuses>
+						<m:ObjectStatus
+								title="Criado em"
+							text="{ path:'DataCriacao',
+							  type:'sap.ui.model.type.Date',
+							  formatOptions: {
+							  	UTC: true,
+							  	calendarType: 'Gregorian',
+						      	pattern: 'dd/MM/y' }
+						}"
+								active="false"/>						
+						<m:ObjectStatus
+								title="Ultima Modificação"
+								text="{path: 'DataModif',
+									   type:'sap.ui.model.type.Date',
+							  formatOptions: {
+							  UTC: true,
+							  calendarType: 'Gregorian',
+						      pattern: 'dd/MM/y'  }
+								 }"
+								active="false"/>
+						<m:ObjectStatus
+								title="ID"
+								text="{DocId}"
+								active="false"
+								visible="false"
+						/>
+						<m:ObjectStatus
+								title="Tipo do Arquivo"
+								text="{FileCat}"
+								active="false"
+						/>			
+					</upload:statuses>
+				</upload:UploadSetItem>
+			</upload:items>
+        </upload:UploadSet>
+</mvc:View>

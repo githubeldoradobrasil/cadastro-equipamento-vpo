@@ -1,0 +1,20 @@
+<core:FragmentDefinition 
+        xmlns="sap.m" 
+        xmlns:core="sap.ui.core">
+	<Dialog title="Categoria do Arquivo" class="sapUiPopupWithPadding" contentWidth="200px" id="categoryDialog" resizable="true" draggable="true" >
+		<Label text="Tipo do Arquivo" required="true"/>
+		<ComboBox id="cbCategArquivo"
+		          items="{
+				  path: '/SH_CategoriaArquivoSet'
+				}">
+		<core:Item key="{Id}" text="{Id}" />
+		</ComboBox>
+		<beginButton>
+			<Button text="Confirmar" press="onConfirmCategory" visible="true" type="Emphasized"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancelar" press="onCloseDialogCategory" visible="true"/>
+		</endButton>
+		
+	</Dialog>
+</core:FragmentDefinition>

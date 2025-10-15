@@ -1,0 +1,189 @@
+<mvc:View
+    controllerName="cadastroequip_fornecedor_vpo.controller.Detail"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+>
+    <VBox>
+        <f:SimpleForm
+            id="SimpleFormDriverInfo"
+            editable="false"
+            layout="ColumnLayout"
+            title="{i18n>detailEquipTitle}"
+            columnsM="2"
+            columnsL="3"
+            columnsXL="3"
+        >
+            <f:content>
+                <core:Title text="Informações do Veículo" />
+                <Label text="{i18n>UfPlaca}" />
+                <Text text="{UfPlacaText}" />
+                <Label text="{i18n>Cidade}" />
+                <Text text="{CidadeVeiculoText}" />
+                <Label text="{i18n>ValidPlaca}" />
+                <Text
+                    text="{ path:'ValidPlaca',
+							  type:'sap.ui.model.type.DateTime',
+							  formatOptions: {
+							  UTC: true,
+							  calendarType: 'Gregorian',
+						      pattern: 'dd/MM/y' }
+						}"
+                />
+                <Label text="{i18n>CorVeiculo}" />
+                <Text text="{CorVeiculoText}" />
+                <Label text="{i18n>NumEixos}" />
+                <Text text="{NumEixos}" />
+                <Label text="{i18n>Marca}" />
+                <Text text="{MarcaText}" />
+                <Label text="{i18n>AnoFab}" />
+                <Text
+                    text="{path: 'AnoFabDate', 
+						     type:'sap.ui.model.type.Date',
+						     formatOptions: {
+							 UTC: true,
+							 calendarType: 'Gregorian',
+						     pattern: 'yyyy' }}"
+                />
+                <Label text="{i18n>Frota}" />
+                <Text text="{Frota}" />
+
+                <core:Title text="Documento do Veículo" />
+                <Label text="{i18n>ChassisNum}" />
+                <Text text="{ChassisNum}" />
+                <Label text="{i18n>ChassiRemarcado}" />
+                <Text text="{ChassiRemarcado}" />
+                <Label text="{i18n>Rntrc}" />
+                <Text text="{Rntrc}" />
+                <Label text="{i18n>AET}" />
+                <Text
+                    text="{path: 'Licenciado', formatter: '.formatter.isLicenciado'  }"
+                />
+                <Label text="{i18n>DtEmisRntrc}" />
+                <Text
+                    text="{
+						path: 'DtEmisRntrc',
+						type: 'sap.ui.model.type.Date',
+						formatOptions: {
+							UTC: true,
+							calendarType: 'Gregorian',
+							pattern: 'dd/MM/yy'
+						}
+					}"
+                />
+                <Label text="{i18n>DtVencRntrc}" />
+                <Text
+                    text="{
+						path: 'DtVencRntrc',
+						type: 'sap.ui.model.type.Date',
+						formatOptions: {
+							UTC: true,
+							calendarType: 'Gregorian',
+							pattern: 'dd/MM/yy'
+						}
+					}"
+                />
+                <Label text="{i18n>DtValidAntt}" />
+                <Text
+                    text="{
+						path: 'DtValidAntt',
+						type: 'sap.ui.model.type.Date',
+						formatOptions: {
+							UTC: true,
+							calendarType: 'Gregorian',
+							pattern: 'dd/MM/yy'
+						}
+					}"
+                />
+                <Label text="{i18n>ValidLicenciamento}" />
+                <Text
+                    text="{
+						path: 'DtLicenciamento',
+						type: 'sap.ui.model.type.Date',
+						formatOptions: {
+							UTC: true,
+							calendarType: 'Gregorian',
+							pattern: 'dd/MM/yy'
+						}
+					}"
+                />
+                <Label text="{i18n>ValidAET}" />
+                <Text
+                    text="{
+						path: 'MmaaaaLicenciamentoDate',
+						type: 'sap.ui.model.type.Date',
+						formatOptions: {
+							UTC: true,
+							'calendarType': 'Gregorian',
+							'pattern': 'MM/yyyy'
+						}
+					}"
+                />
+                <Label text="{i18n>Renavam}" />
+                <Text text="{Renavam}" />
+
+                <core:Title text="{i18n>Outras Informações}" />
+                <Label text="{i18n>GrpAutori}" />
+                <Text text="{GrpAutori}" />
+                <Label text="{i18n>TpTransporte}" />
+                <Text text="{TpTransporteText}" />
+                <Label text="{i18n>Restricao}" />
+                <Text
+                    text="{path: 'Restricao', formatter: '.formatter.isLicenciado' }"
+                />
+                <Label text="{i18n>Motivo}" />
+                <Text text="{Motivo}" />
+                <Label text="{i18n>OrigRestricao}" />
+                <Text text="{OrigRestricao}" />
+                <Label text="{i18n>RegistroANTT}" />
+                <Text  text="{path: 'RegistroANTT',formatter: '.formatANTT'}" />
+            </f:content>
+        </f:SimpleForm>
+        <Title
+            text="{i18n>OperadorasVP}"
+            class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+        />
+        <Table
+            id="tblOperadorasView"
+            items="{path: 'operadoraView>/E_OperadoraSet'}"
+            width="100%"
+        >
+            <columns>
+                <Column>
+                    <header>
+                        <Label text="Operadora" />
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Label text="Ativa" />
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Label text="Utilização" />
+                    </header>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{operadoraView>Operadora}" />
+                        <CheckBox
+                            selected="{operadoraView>Ativa}"
+                            enabled="false"
+                            select="onOperadoraAtivaChange"
+                        />
+                        <RadioButton
+                            id="rbUtilizacao"
+                            selected="{operadoraView>Utilizacao}"
+                            enabled="false"
+                            select="{= ${operadoraView>Ativa} ? 'onOperadoraUtilizacaoChange' : '' }"
+                        />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </VBox>
+</mvc:View>

@@ -1,0 +1,403 @@
+<mvc:View
+    controllerName="cadastroequip_fornecedor_vpo.controller.Detail"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    id="detailViewEquipEdit"
+>
+    <VBox>
+        <f:SimpleForm
+            id="SimpleFormEquipEdit"
+            editable="true"
+            layout="ColumnLayout"
+            title="{i18n>detailEquipTitle}"
+            columnsM="2"
+            columnsL="3"
+            columnsXL="3"
+        >
+            <f:content>
+                <core:Title text="{i18n>veiculoInfo}" />
+                <Label
+                    text="{i18n>Nome}"
+                    required="true"
+                />
+                <Input
+                    value="{NomeEquipamento}"
+                    id="inputNomeEquipamento"
+                    liveChange="handleChange"
+                    maxLength="40"
+                />
+                <Label
+                    text="{i18n>UfPlaca}"
+                    required="true"
+                />
+                <ComboBox
+                    value="{UfPlacaText}"
+                    id="cbUfPlaca"
+                    selectionChange="onComboBoxChange"
+                    required="true"
+                    valueStateText="Estado Obrigatório !"
+                    items="{
+					path: '/SH_EstadosSet'
+				}"
+                >
+                    <core:Item
+                        key="{Uf}"
+                        text="{Descricao}"
+                    />
+                </ComboBox>
+                <Label
+                    text="{i18n>Cidade}"
+                    required="true"
+                />
+                <ComboBox
+                    selectedKey="{DomicCode}"
+                    value="{CidadeVeiculoText}"
+                    id="cbCidadeVeiculo"
+                    selectionChange="onComboBoxChange"
+                    required="true"
+                    modelContextChange="onLoadCity"
+                    valueStateText="Cidade Obrigatório!"
+                    items="{
+					path: '/SH_CidadesSet'
+				}"
+                >
+                    <core:Item
+                        key="{Taxjurcode}"
+                        text="{Text}"
+                    />
+                </ComboBox>
+                <Label text="{i18n>ValidPlaca}" />
+                <DatePicker
+                    id="inputValidPlaca"
+                    liveChange="handleChange"
+                    change="handleDateChange"
+                    class="sapUiSmallMarginBottom"
+                    value="{ path:'ValidPlaca',
+							  type:'sap.ui.model.type.DateTime',
+							  formatOptions: {
+							  UTC: true,
+							  calendarType: 'Gregorian',
+						      pattern: 'dd/MM/y' }
+						}"
+                />
+                <Label
+                    text="{i18n>CorVeiculo}"
+                    required="true"
+                />
+                <ComboBox
+                    selectedKey="{CorVeiculo}"
+                    id="cbCorVeiculo"
+                    selectionChange="onComboBoxChange"
+                    required="true"
+                    valueStateText="Cor Obrigatório!"
+                    items="{
+					path: '/SH_CorEquipamentoSet'
+				}"
+                >
+                    <core:Item
+                        key="{Id}"
+                        text="{Descricao}"
+                    />
+                </ComboBox>
+                <Label
+                    text="{i18n>NumEixos}"
+                    required="true"
+                />
+                <Select
+                    id="idNumEixos"
+                    selectedKey="{NumEixos}"
+                >
+                    <items>
+                        <core:Item
+                            key="01"
+                            text="01"
+                        />
+                        <core:Item
+                            key="02"
+                            text="02"
+                        />
+                        <core:Item
+                            key="03"
+                            text="03"
+                        />
+                        <core:Item
+                            key="04"
+                            text="04"
+                        />
+                    </items>
+                </Select>
+                <Label
+                    text="{i18n>Marca}"
+                    required="true"
+                />
+                <ComboBox
+                    selectedKey="{Marca}"
+                    id="cbMarca"
+                    selectionChange="onComboBoxChange"
+                    required="true"
+                    valueStateText="Código Marca Obrigatório!"
+                    items="{
+					path: '/SH_MarcaEquipamentoSet'
+				}"
+                >
+                    <core:Item
+                        key="{Id}"
+                        text="{Descricao}"
+                    />
+                </ComboBox>
+                <Label text="{i18n>AnoFab}" />
+                <DatePicker
+                    id="inputAnoFab"
+                    liveChange="handleChange"
+                    change="handleDateChange"
+                    class="sapUiSmallMarginBottom"
+                    value="{ path:'AnoFabDate', 
+							  type:'sap.ui.model.type.Date',
+							  formatOptions: {
+							  UTC: true,
+							  calendarType: 'Gregorian',
+						      pattern: 'yyyy' }
+						}"
+                />
+                <Label text="{i18n>Frota}" />
+                <Input
+                    value="{Frota}"
+                    id="inputFrota"
+                    liveChange="handleChange"
+                    maxLength="50"
+                />
+
+                <core:Title text="Documento do Veículo" />
+                <Label text="{i18n>ChassisNum}" />
+                <Input
+                    value="{ChassisNum}"
+                    id="inputChassisNum"
+                    liveChange="handleChange"
+                    maxLength="30"
+                />
+                <Label text="{i18n>ChassiRemarcado}" />
+                <Input
+                    value="{ChassiRemarcado}"
+                    id="inputChassiRemarcado"
+                    liveChange="handleChange"
+                    maxLength="30"
+                />
+                <Label
+                    text="{i18n>Rntrc}"
+                    required="true"
+                />
+                <Input
+                    value="{Rntrc}"
+                    id="inputRntrc"
+                    liveChange="handleChange"
+                    maxLength="20"
+                />
+                <CheckBox
+                    text="{i18n>AET}"
+                    selected="{Licenciado}"
+                />
+                <Label
+                    text="{i18n>DtEmisRntrc}"
+                    required="true"
+                />
+                <DatePicker
+                    id="inputDtEmisRntrc"
+                    liveChange="handleChange"
+                    change="handleDateChange"
+                    class="sapUiSmallMarginBottom"
+                    value="{ path:'DtEmisRntrc',
+							type:'sap.ui.model.type.Date',
+							formatOptions: {
+							UTC: true,
+							calendarType: 'Gregorian',
+						    pattern: 'dd/MM/y' } 
+							}"
+                />
+                <Label
+                    text="{i18n>DtVencRntrc}"
+                    required="true"
+                />
+                <DatePicker
+                    id="inputDtVencRntrc"
+                    liveChange="handleChange"
+                    change="handleDateChange"
+                    class="sapUiSmallMarginBottom"
+                    value="{ path:'DtVencRntrc',
+							type:'sap.ui.model.type.Date',
+							formatOptions: {
+							UTC: true,
+							calendarType: 'Gregorian',
+						    pattern: 'dd/MM/y' } }"
+                />
+                <Label text="{i18n>DtValidAntt}" />
+                <DatePicker
+                    id="inputDtValidAntt"
+                    liveChange="handleChange"
+                    class="sapUiSmallMarginBottom"
+                    value="{ path:'DtValidAntt',
+							type:'sap.ui.model.type.Date',
+							formatOptions: {
+							UTC: true,
+							calendarType: 'Gregorian',
+						    pattern: 'dd/MM/y' } }"
+                    change="handleDateChange"
+                />
+                <Label
+                    text="{i18n>ValidLicenciamento}"
+                    required="true"
+                />
+                <DatePicker
+                    id="inputDtLicenciamento"
+                    liveChange="handleChange"
+                    change="handleDateChange"
+                    class="sapUiSmallMarginBottom"
+                    value="{ path:'DtLicenciamento',
+							type:'sap.ui.model.type.Date',
+							formatOptions: {
+							UTC: true,
+							calendarType: 'Gregorian',
+						    pattern: 'dd/MM/y' } }"
+                />
+                <Label text="{i18n>ValidAET}" />
+                <DatePicker
+                    id="inputMmaaaaLicenciamento"
+                    liveChange="handleChange"
+                    value="{
+						path: 'MmaaaaLicenciamentoDate',
+						type: 'sap.ui.model.type.Date',
+						formatOptions: {
+							UTC: true,
+							calendarType: 'Gregorian',
+							pattern: 'MM/yyyy'
+						}
+					}"
+                    change="handleDateChange"
+                    class="sapUiSmallMarginBottom"
+                />
+                <Label
+                    text="{i18n>Renavam}"
+                    required="true"
+                />
+                <Input
+                    value="{Renavam}"
+                    id="inputRenavam"
+                    liveChange="handleChange"
+                    maxLength="11"
+                    type="Text"
+                />
+
+                <!-- <core:Title text="{i18n>Outras Informações}"/> -->
+                <core:Title text="{i18n>Outras Informações}" />
+                <Label text="{i18n>GrpAutori}" />
+                <Input
+                    value="{GrpAutori}"
+                    id="inputGrpAutori"
+                    liveChange="handleChange"
+                    maxLength="10"
+                />
+                <Label
+                    text="{i18n>TpTransporte}"
+                    required="true"
+                />
+                <ComboBox
+                    selectedKey="{TpTransporte}"
+                    id="cbTpTransporte"
+                    selectionChange="onComboBoxChange"
+                    required="true"
+                    valueStateText="Tipo de Transporte Obrigatório!"
+                    items="{
+					path: '/SH_TipoTransporteSet'
+				}"
+                >
+                    <core:Item
+                        key="{Id}"
+                        text="{Descricao}"
+                    />
+                </ComboBox>
+
+                <CheckBox
+                    text="{i18n>Restricao}"
+                    selected="{Restricao}"
+                    enabled="{detailView>/enableInternalInformation}"
+                />
+
+                <Label text="{i18n>Motivo}" />
+                <Input
+                    value="{Motivo}"
+                    id="inputMotivo"
+                    liveChange="handleChange"
+                    maxLength="100"
+                    enabled="{detailView>/enableInternalInformation}"
+                />
+
+                <Label text="{i18n>OrigRestricao}" />
+                <Input
+                    value="{OrigRestricao}"
+                    id="inputOrigRestricao"
+                    liveChange="handleChange"
+                    maxLength="10"
+                    enabled="{detailView>/enableInternalInformation}"
+                />
+
+                <Label text="{i18n>RegistroANTT}" />
+                <Input
+                    id="inputRegistroANTT"
+                    value="{ path: 'RegistroANTT', formatter: '.formatANTT'}"
+                    liveChange="handleChangeAntt"
+                    maxLength="18"
+                    required="{= ${CodTpEquipPedagio} === 'X' }"
+                    enabled="{= ${CodTpEquipPedagio} === 'X' }"
+                />
+            </f:content>
+        </f:SimpleForm>
+        <Title
+            text="{i18n>OperadorasVP}"
+            class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+        />
+        <Table
+            id="tblOperadorasEdit"
+            items="{path: 'operadoraView>/E_OperadoraSet'}"
+            width="100%"
+        >
+            <columns>
+                <Column>
+                    <header>
+                        <Label text="Operadora" />
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Label text="Ativa" />
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Label text="Utilização" />
+                    </header>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{operadoraView>Operadora}" />
+                        <CheckBox
+                            selected="{operadoraView>Ativa}"
+                            enabled="false"
+                            select="onOperadoraAtivaChange"
+                        />
+                        <RadioButton
+                            id="rbUtilizacao"
+                            selected="{operadoraView>Utilizacao}"
+                            enabled="{= ${operadoraView>Ativa} }"
+                            select="{= ${operadoraView>Ativa} ? 'onOperadoraUtilizacaoChange' : '' }"
+                            groupName="utilizacaoGroupEdit" 
+                        />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </VBox>
+</mvc:View>

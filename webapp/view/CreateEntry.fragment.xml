@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Cadastrar Equipamento" class="sapUiPopupWithPadding" contentWidth="200px" id="createDialog" resizable="true" draggable="true" >
+		<Label id="_IDGenLabel1" text="Placa" required="true"/>
+		<Input id="_placaInput" showSuggestion="true" width="100%" showValueHelp="false" required="true" maxLength="7" 
+			 value="{CreateEntry>/Placa}">
+		</Input>
+        <!-- <Label id="_IDGenLabel2" text="Nome do Motorista" required="false"/>
+		<Input id="_NomeInput" showSuggestion="true" width="100%" showValueHelp="false"  required="false" type="Text"
+			 value="{CreateEntry>/Nome}">
+		</Input> -->
+		<beginButton>
+			<Button text="Salvar" press="onCreateEntry" visible="true" type="Emphasized"/>
+		</beginButton>
+		<endButton>
+			<Button id="_IDGenButton2" text="Cancelar" press="onCloseDialogCreate" visible="true"/>
+		</endButton>
+		
+	</Dialog>
+</core:FragmentDefinition>

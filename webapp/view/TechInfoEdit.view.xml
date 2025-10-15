@@ -1,0 +1,77 @@
+<mvc:View
+	controllerName="cadastroequip_fornecedor_vpo.controller.Detail"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<VBox class="sapUiSmallMargin">
+    <f:SimpleForm id="SimpleFormDocumentsDriverInfoEdit"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="{i18n>TechInfo}"
+			labelSpanL="4"
+            adjustLabelSpan="false"
+			labelSpanM="4"
+			emptySpanL="1"
+			emptySpanM="1"
+			columnsL="1"
+			columnsM="1"
+            singleContainerFullSize="false">
+			<f:content>
+				<Label text="{i18n>TpObjTec}" required="true"/>
+				<ComboBox selectedKey="{TpObjTec}" id="cbTpObjTec" selectionChange="onComboBoxChange" required="true" valueStateText="Tipo de Transporte Obrigatório!"
+				items="{
+					path: '/SH_TechnicalObjectSet'
+				}">
+				<core:Item key="{Id}" text="{Descricao}" />
+				</ComboBox>
+				<Label text="{i18n>CodTpEquip}" required="true"/>
+				<ComboBox selectedKey="{CodTpEquip}" id="cbCodTpEquip" selectionChange="onComboBoxChange" required="true" valueStateText="Tipo de Objeto Tecnico Obrigatório!"
+				items="{
+					path: '/SH_TipoEquipamentoSet',
+					length: 1000
+				}">
+				<core:Item key="{Id}" text="{Descricao}" />
+				</ComboBox>
+				<Label text="{i18n>AlturaVeiculo}"/>
+				<Input value="{AlturaVeiculo}" id="inputAlturaVeiculo" liveChange="handleChange" maxLength='14' type="Number"/>
+				<Label text="{i18n>LarguraVeiculo}"/>
+				<Input value="{LarguraVeiculo}" id="inputLarguraVeiculo" liveChange="handleChange"  maxLength='14' type="Number"/>
+				<Label text="{i18n>CompriVeiculo}"/>
+				<Input value="{CompriVeiculo}" id="inputCompriVeiculo" liveChange="handleChange"  maxLength='14' type="Number"/>
+				<Label text="{i18n>UniComprimento}"/>
+				<Input value="{UniComprimento}" id="inputUniComprimento" liveChange="handleChange" type="Text" maxLength='3' />
+				<Label text="{i18n>Tara}" required="true"/>
+				<Input value="{Tara}" id="inputTara" liveChange="handleChange"  maxLength='14' type="Number"/>
+				<Label text="{i18n>UniPeso}"/>
+				<Input value="{UniPeso}" id="inputUniPeso" liveChange="handleChange" type="Text" maxLength='3'/>
+				<Label text="{i18n>CapMax}" required="true"/>
+				<Input value="{CapMax}" id="inputCapMax" liveChange="handleChange"  maxLength='14' type="Number"/>
+				<Label text="{i18n>Lotacao}" required="true"/>
+				<Input value="{Lotacao}" id="inputLotacao" liveChange="handleChange"  maxLength='14' enabled="false"/>
+				<Label text="{i18n>VolumCarregamentoCarga}"/>
+				<Input value="{path: 'VolumCarregamentoCarga' }" maxLength='14' id="inputVolumCarregamentoCarga" liveChange="handleChange" type="Number" />
+				<Label text="{i18n>UniVolumeCarga}"/>
+				<Input value="{UniVolumeCarga}" id="inputUniVolumeCarga" liveChange="handleChange" type="Text" maxLength='3' />
+				<Label text="{i18n>AlturaEspCarga}"/>
+				<Input value="{AlturaEspCarga}" id="inputAlturaEspCarga" liveChange="handleChange"  maxLength='14' type="Number"/>
+				<Label text="{i18n>UniCompEspacoCarga}"/>
+				<Input value="{UniCompEspacoCarga}" id="inputUniCompEspacoCarga" liveChange="handleChange" type="Text" maxLength='3' />
+				<Label text="{i18n>LarguraMaxCarga}"/>
+				<Input value="{LarguraMaxCarga}" id="inputLarguraMaxCarga" liveChange="handleChange"  maxLength='14' type="Number"/>
+				<Label text="{i18n>CompriMaxCarga}"/>
+				<Input value="{CompriMaxCarga}" id="inputCompriMaxCarga" liveChange="handleChange"  maxLength='14' type="Number"/>
+				<Label text="{i18n>NumCompartimentos}"/>
+				<Input value="{NumCompartimentos}" id="inputNumCompartimentos" liveChange="handleChange" maxLength='2' type="Number"/>
+				<CheckBox text="{i18n>Rastreador}" selected="{Rastreador}" visible="false"/>
+				<Label text="{i18n>TipoRastreador}"/>
+				<ComboBox selectedKey="{TipoRastreador}" id="cbTipoRastreador" selectionChange="onComboBoxChange" valueStateText="Rastreador Obrigatório!"
+					items="{
+					path: '/SH_TrackerTypeSet'
+				}">
+				<core:Item key="{Id}" text="{Descricao}" />
+				</ComboBox>
+			</f:content>
+		</f:SimpleForm>
+    </VBox>
+</mvc:View>

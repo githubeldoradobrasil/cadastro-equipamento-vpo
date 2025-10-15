@@ -1,0 +1,9 @@
+.headerBox {
+    display: flex;
+    width: 100%;
+    justify-content: space-between !important;
+}
+
+.OVPItem {
+    opacity: 1 !important;
+}   

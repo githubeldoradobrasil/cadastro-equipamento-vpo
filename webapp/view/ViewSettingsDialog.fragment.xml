@@ -1,0 +1,10 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		id="viewSettingsDialog"
+		confirm=".onConfirmViewSettingsDialog">
+			<filterItems>
+			</filterItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

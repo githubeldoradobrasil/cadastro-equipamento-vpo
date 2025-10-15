@@ -1,0 +1,18 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified">
+	<Dialog title="Criar Equipamentos em Massa" class="sapUiPopupWithPadding" contentWidth="600px" id="uploadEquipDialog" resizable="true" draggable="true" >
+		<Label text="Arquivo para Upload" required="true"/>
+			<u:FileUploader id="fileUploader" multiple="false" useMultipart="false" width="100%" name="myFileUpload" uploadUrl="/sap/opu/odata/sap/ZGTWPM095_EQUIPAMENTO_V2_SRV/E_AnexosSet" placeholder="Importar arquivo preenchido" uploadComplete="handleUploadComplete" fileType="xlsx" />
+        <Toolbar>
+			 <Button id="btnMessages" text="Log do import" tooltip="Messages" icon="sap-icon://message-popup" press="handleUploadMessagesPress" type="Emphasized"/>                                            
+		<ToolbarSpacer id="tbsearch"/>
+			<Button id="btnExport" text="Exportar Template" tooltip="Export" icon="sap-icon://excel-attachment" press="handleExportTemplate" type="Accept" class=""/>
+		</Toolbar>
+		<beginButton>
+			<Button id="btnImport" text="Importar" press="handleUploadEquip" visible="true" type="Emphasized"/>
+		</beginButton>
+		<endButton>
+			<Button id="btnCancelUpload" text="Cancelar" press=".onCloseDialogUploadEquip" visible="true"/>
+		</endButton>
+		
+	</Dialog>
+</core:FragmentDefinition>

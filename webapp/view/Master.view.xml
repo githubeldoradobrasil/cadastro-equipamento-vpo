@@ -1,0 +1,124 @@
+<mvc:View controllerName="cadastroequip_fornecedor_vpo.controller.Master"
+xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:semantic="sap.f.semantic">
+<semantic:SemanticPage id="pageMaster"
+		core:require="{
+			formatMessage: 'sap/base/strings/formatMessage',
+			DateType: 'sap/ui/model/type/Date'
+		}">
+		<semantic:titleHeading>
+			<Title
+				id="masterHeaderTitle"
+				text="{
+					parts: [
+						'i18n>masterTitleCount',
+						'masterView>/titleCount'
+					],
+					formatter: 'formatMessage'
+			}"/>
+		</semantic:titleHeading>
+		<semantic:content>
+			<!-- For client side filtering add this to the items attribute: parameters: {operationMode: 'Client'}}" -->
+			<List
+				id="list"
+				width="auto"
+				class="sapFDynamicPageAlignContent"
+				items="{
+			 			path: '/E_EquipamentoSet',
+						groupHeaderFactory: '.createGroupHeader'
+						
+				 }"
+				busyIndicatorDelay="{masterView>/delay}"
+				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}"
+				growing="true"
+				growingScrollToLoad="true"
+				growingThreshold="6"
+				updateStarted=".onUpdateStart" 
+				updateFinished="onUpdateFinished"
+				selectionChange=".onSelectionChange">
+				<noData>
+					<IllustratedMessage
+						title="Nenhum Equipamento vinculado"
+						illustrationType="sapIllus-NoFilterResults"
+						enableDefaultTitleAndDescription="false"/>
+				</noData>
+				<infoToolbar>
+					<Toolbar
+						active="true"
+						id="filterBar"
+						visible="{masterView>/isFilterBarVisible}"
+						press=".onOpenViewSettings">
+						<Title
+							id="filterBarLabel"
+							text="{masterView>/filterBarLabel}" />
+					</Toolbar>
+				</infoToolbar>
+				<headerToolbar>
+					<OverflowToolbar>
+						<SearchField
+							id="searchField"
+							showRefreshButton="true"
+							tooltip="{i18n>masterSearchTooltip}"
+							width="100%"
+							search=".onSearch">
+							<layoutData>
+								<OverflowToolbarLayoutData
+									minWidth="150px"
+									maxWidth="240px"
+									shrinkable="true"
+									priority="NeverOverflow"/>
+							</layoutData>
+						</SearchField>
+						<ToolbarSpacer/>
+						<Button
+							id="filterButton"
+							press=".onOpenViewSettings"
+							icon="sap-icon://filter"							
+							type="Transparent"/>
+						<Button id="createButton" 
+								press=".onOpenViewCreate"								
+								icon="sap-icon://add"/>
+						<Button id="importButton"
+								press=".onPressUpload"
+								icon="sap-icon://upload"
+								type="Transparent"
+								/>
+					</OverflowToolbar>
+				</headerToolbar>
+				<items>
+					<ObjectListItem
+						type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}"
+						press=".onSelectionChange"
+						title="{
+							parts: [
+								'i18n>commonItemTitle',
+								'NomeEquipamento'
+							]
+						}"
+						number="{
+							path: 'Short',
+							formatOptions: { style: 'short' }
+						}">
+						    <customData>
+        <core:CustomData key="class" value="no-border-item" />
+    </customData>
+
+						<firstStatus>
+							<ObjectStatus
+								state="{= ${Status} !== 'CR' ? 'Error' : 'Success' }"
+								text="{= ${StatusText} === '' ? 'CADASTRO EM PROCESSAMENTO' : %{StatusText} }"/>
+
+						</firstStatus>
+						<attributes>
+							<ObjectAttribute title="{i18n>commonItemPlaca}"
+								text="{path: 'Placa' }" />
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
+		</semantic:content>
+	</semantic:SemanticPage>
+</mvc:View>
+
